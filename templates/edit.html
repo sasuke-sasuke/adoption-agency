@@ -1,0 +1,55 @@
+{% extends 'base.html' %}{% block title %} Edit Pet {% endblock %} {% block
+content %}
+<h1 class="display-2 text-center">Edit a Pet</h1>
+<div class="container-md d-flex justify-content-center">
+  <div class="card text-center" style="max-width: 650px">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img
+          class="img-fluid rounded-start"
+          src="{{ pet.photo_url }}"
+          alt="Picture of {{ pet.name }} a {{ pet.species }}"
+        />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h2 class="card-title">{{ pet.name }}</h2>
+          {% if pet.available %}
+          <p class="card-text">{{ pet.name }}<strong> is available!</strong></p>
+          {% endif %} {% if pet.age %}
+          <p class="card-text">Age: {{pet.age}} years old</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-md mt-3">
+  <form class="form-control border-0">
+    {{ form.hidden_tag() }}
+    <p>
+      {{ form.photo_url.label(class_='form-label') }} {{
+      form.photo_url(class_='form-control') }} {{form.photo_url.error}}
+    </p>
+    <p>
+      {{ form.notes.label(class_='form-label') }} {{
+      form.notes(class_='form-control') }} {{form.notes.error}}
+    </p>
+    <p>
+      {{ form.available.label(class_='form-check-label') }} {{
+      form.available(class_='form-check-input') }}
+    </p>
+    <div class="d-flex justify-content-md-end justify-content-center">
+      <a href="/" class="btn btn-outline-danger m-1">Cancel</a>
+      <button
+        class="btn btn-success m-1"
+        formaction="/{{ pet.id }}"
+        formmethod="POST"
+      >
+        Confirm
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

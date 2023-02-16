@@ -1,0 +1,21 @@
+{% extends 'base.html' %}{% block title %} Add Pet {% endblock %} {% block
+content %}
+<div class="container-md">
+  <h1 class="display-3">Add a Pet</h1>
+  <form class="form-control border-0">
+    {{ form.hidden_tag() }} {% for field in form if
+    field.widget.input_type!='hidden' %}
+    <p>
+      {{ field.label(class_='form-label') }} {{ field(class_='form-control') }}
+      {% for error in field.errors %} {{error}} {% endfor %}
+    </p>
+    {% endfor %}
+    <div class="d-flex justify-content-end">
+      <a href="/" class="btn btn-outline-danger m-1">Cancel</a>
+      <button class="btn btn-success m-1" formaction="/add" formmethod="POST">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
